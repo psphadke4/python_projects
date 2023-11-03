@@ -1,0 +1,70 @@
+{% extends 'music/base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <br>
+                  {% if messages %}
+                                        {% for message in messages %}
+                                        <div class="alert alert-success" role="alert">
+                                            {{ message }}
+                                        </div>
+                            {% endfor %}
+                        {% endif %}
+                <div class="list-group">
+                    <h2 class="list-group-item list-group-item-action text-center">Choose Your Favorite Songs</h2>
+                    <br>
+                </div>
+                {% if user.is_authenticated  %}
+                    {% if playlist %}
+                        <div id="carouselExample" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                {% for play in playlist %}
+                                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                        <a href="{% url 'list_songs' play.album_name %}">
+                                            <img src="{{ play.song_image.url }}" class="d-block w-100" alt="...">
+                                        </a>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExample" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </a>
+                        </div>
+                        <script>
+                            $(document).ready(function () {
+                                // Initialize the carousel
+                                $('#carouselExample').carousel();
+                            });
+                        </script>
+                    {% endif %}
+                    {% else %}
+                       <h2>Login</h2><br>
+                        <form method="POST" action="{% url 'home' %}">
+                            {% csrf_token %}
+                            <form>
+
+                              <div class="mb-3">
+                                <input type="text" class="form-control" name="Username" placeholder="username" required>
+                              </div>
+                              <div class="mb-3">
+                                <input type="password" class="form-control" name="Password" placeholder="password" required>
+                              </div><br>
+                              <button type="submit" class="btn btn-primary">Login</button>
+                                  {% endif %}
+
+                            </form>
+
+                        </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock content %}

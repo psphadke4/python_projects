@@ -1,0 +1,60 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: #1DB954;
+    padding: 10px 0;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 20px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+#music-player {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#music-player img {
+    width: 200px;
+    height: 200px;
+    border: 1px solid #888;
+}
+
+#player-controls button {
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #1DB954;
+    color: white;
+    border: none;
+}
+
+#song-list {
+    text-align: center;
+}
+
+#song-list ul {
+    list-style: none;
+}
+
+#song-list ul li {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+#song-list ul li:hover {
+    background-color: #333;
+    color: white;
+}

@@ -1,0 +1,122 @@
+{% extends 'music/base.html' %}
+
+{% block content %}
+  <style>
+    /* Custom CSS for styling */
+    .playlist-container {
+        text-align: center;
+    }
+
+    .playlist-image {
+        max-width: 300px;
+        max-height: 300px;
+        border-radius: 10px;
+    }
+
+    .song-list {
+        list-style: none;
+        padding: 0;
+        margin-left: 80px;
+    }
+
+    .song {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .song-image {
+        max-width: 50px;
+        max-height: 50px;
+        border-radius: 5px;
+    }
+
+    .song-title {
+        margin-left: 10px;
+        color: white;
+        font-family: Arial, sans-serif;
+        cursor: pointer; /* Add cursor pointer for the song titles */
+    }
+
+    /* Custom CSS for the audio player */
+    .audio-player-container {
+        text-align: center;
+        width: 100%;
+        background-color: #333; /* Background color for the player */
+        color: white;
+        padding: 10px;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        z-index: 999; /* Ensure the player is above other content */
+    }
+
+    .audio-player {
+        width: 100%;
+        background-color: #333; /* Background color for the audio player */
+        color: white;
+        padding: 10px;
+    }
+  </style>
+<script>
+    function playSong(songUrl) {
+        {% if user.is_authenticated %}
+        const audioPlayer = document.getElementById('audio-player');
+        audioPlayer.src = songUrl;
+        audioPlayer.play();
+        {% else %}
+        alert('Please log in to play the song.');
+        {% endif %}
+    }
+</script>
+</head>
+<body>
+    <div class="container mt-5">
+        {% if searched %}
+        {% if messages %}
+                                        {% for message in messages %}
+                                        <div class="alert alert-success" role="alert">
+                                            {{ message }}
+                                        </div>
+                            {% endfor %}
+                        {% endif %}
+        <div class="playlist-container">
+            <img src="{{ posts.0.song_image.url }}" class="playlist-image" alt="default.jpg" onerror="this.onerror=null; this.src='/media/default.jpg';">
+            <ul class="song-list">
+            <div class="playlist-container">
+                {% for post in posts %}
+                    <li class="song">
+                        <img src="{{ post.song_image.url }}" class="song-image" alt="default.jpg">
+                        <span onclick="playSong('{{ post.song_file.url }}')" class="song-title">{{ post.title }}</span>
+                    </li>
+                {% endfor %}
+            </div>
+            </ul>
+        </div>
+        {% else %}
+
+        <div class="playlist-container">
+            <img src="{{ playlist_album.0.song_image.url }}" class="playlist-image" alt="default.jpg" onerror="this.onerror=null; this.src='/media/default.jpg';">
+            <ul class="song-list">
+            <div class="playlist-container">
+                {% for t in playlist_album %}
+                    <li class="song">
+                        <img src="{{ t.song_image.url }}" class="song-image" alt="default.jpg">
+                        <span onclick="playSong('{{ t.song_file.url }}')" class="song-title">{{ t.title }}</span>
+                    </li>
+                {% endfor %}
+            </div>
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Audio Player -->
+    <div class="audio-player-container">
+        <audio controls id="audio-player" class="audio-player">
+
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+</body>
+{% endblock content %}
