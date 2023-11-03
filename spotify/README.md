@@ -3,4 +3,4 @@ Clone the Repo
 
 Install django packages for Python and run command
 
-python.exe .\manage.py runserver
+python.exe manage.py runserver
