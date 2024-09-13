@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+    <head>
+        <title>Test Page</title>
+            <style>
+                .this-button {
+                    background-color: blue;
+                    color: white;
+            
+                }
+                .that-button {
+                    background-color: green;
+                    color: white;
+                    border: none;
+                }
+            
+                .this-para {
+                    font-size: large;
+                    background-color: antiquewhite;
+                    size: 0dvw;
+                    font-family: 'Courier New', Courier, monospace;
+                }
+            </style>
+    </head>
+    <body>
+        <script>
+            let cartQuantity=0;
+        </script>
+
+        
+        <button onclick="
+        console.log(`Cart Quantity : ${cartQuantity}`);"> Show Quantity </button>
+        <button onclick=" 
+        cartQuantity=cartQuantity+1;
+        console.log(`Cart Quantity: ${cartQuantity}`);
+        "> Add to cart</button>
+        <button onclick="
+        cartQuantity=cartQuantity+2;
+        console.log(`Cart Quantity: ${cartQuantity}`);
+        "> +2 </button>
+        <button onclick="
+        cartQuantity=cartQuantity+3;
+        console.log(`Cart Quantity: ${cartQuantity}`);
+        "> +3 </button>
+        <button onclick="
+        cartQuantity=0
+        console.log(`Cart was Reset`);
+        console.log(`Cart Quantity: ${cartQuantity}`);
+        "> Reset </button>
+
+    </body>
+</html>
+
